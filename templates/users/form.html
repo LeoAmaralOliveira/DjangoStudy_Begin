@@ -2,7 +2,11 @@
 {% load static %}
 {% block content %}
             <section class="galeria" style="margin-left: 5em">
-                <form action="" method="">
+                {% if dest_url == "login" %}
+                <form action="{% url 'login' %}" method="{{http_method}}">
+                {% else %}
+                <form action="{% url 'register' %}" method="{{http_method}}">
+                {% endif %}
                     {% csrf_token %}
                     <div class="row">
                         {% for field in form.visible_fields %}
