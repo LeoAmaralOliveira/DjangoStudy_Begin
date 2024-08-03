@@ -22,7 +22,7 @@ def login(request):
 
             if user:
                 auth.login(request, user)
-                messages.success(request, f"{username} logado com sucesso!")
+                messages.success(request, f"Seja bem vindo {username}!")
                 return redirect('index')
             else:
                 messages.error(request, "Erro ao efetuar login")
@@ -30,13 +30,8 @@ def login(request):
 
     return render(
         request,
-        'users/form.html',
-        {
-            "form": form,
-            "button_text": "Login",
-            "dest_url": "login",
-            "http_method": "POST"
-        }
+        'users/login.html',
+        {"form": form}
     )
 
 
@@ -46,17 +41,9 @@ def register(request):
     if request.method == 'POST':
         form = RegisterForms(request.POST)
         if form.is_valid():
-            if form["password_1"].value() != form["password_2"].value():
-                messages.error(request, "Senhas não são iguais")
-                return redirect('register')
-
             register_name = form["register_name"].value()
             email = form["email"].value()
             password_1 = form["password_1"].value()
-
-            if User.objects.filter(username=register_name).exists():
-                messages.error(request, "Usuário já existente")
-                return redirect('register')
 
             user = User.objects.create_user(
                 username=register_name,
@@ -70,13 +57,8 @@ def register(request):
 
     return render(
         request,
-        'users/form.html',
-        {
-            "form": form,
-            "button_text": "Criar sua conta",
-            "dest_url": "register",
-            "http_method": "POST"
-        }
+        'users/register.html',
+        {"form": form}
     )
 
 
