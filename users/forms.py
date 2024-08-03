@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 
 
 class LoginForms(forms.Form):
@@ -27,8 +28,8 @@ class LoginForms(forms.Form):
 
 
 class RegisterForms(forms.Form):
-    nome_cadastro = forms.CharField(
-        label="Nome completo",
+    register_name = forms.CharField(
+        label="Nome de usuário",
         required=True,
         max_length=100,
         widget=forms.TextInput(
@@ -39,7 +40,7 @@ class RegisterForms(forms.Form):
         )
     )
     email = forms.EmailField(
-        label="Email",
+        label="E-mail",
         required=True,
         max_length=100,
         widget=forms.EmailInput(
@@ -71,3 +72,40 @@ class RegisterForms(forms.Form):
             }
         )
     )
+
+    def clean_register_name(self):
+        name = self.cleaned_data.get("register_name")
+        if name:
+            name = name.strip()
+            if ' ' in name:
+                raise forms.ValidationError(
+                    "Espaços não são permitidos neste campo"
+                )
+            elif User.objects.filter(username=name).exists():
+                raise forms.ValidationError(
+                    "Usuário já existente"
+                )
+            else:
+                return name
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if email:
+            if User.objects.filter(email=email).exists():
+                raise forms.ValidationError(
+                    "E-mail já existente"
+                )
+            else:
+                return email
+
+    def clean_password_2(self):
+        password_1 = self.cleaned_data.get("password_1")
+        password_2 = self.cleaned_data.get("password_2")
+
+        if password_1 and password_1:
+            if password_1 != password_2:
+                raise forms.ValidationError(
+                    "As senhas não são iguais"
+                )
+            else:
+                return password_2
