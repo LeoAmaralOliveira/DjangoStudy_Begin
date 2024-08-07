@@ -15,9 +15,7 @@ def login(request):
             password = form["password"].value()
 
             user = auth.authenticate(
-                request,
-                username=username,
-                password=password
+                request, username=username, password=password
             )
 
             if user:
@@ -28,11 +26,7 @@ def login(request):
                 messages.error(request, "Erro ao efetuar login")
                 return redirect('login')
 
-    return render(
-        request,
-        'users/login.html',
-        {"form": form}
-    )
+    return render(request, 'users/login.html', {"form": form})
 
 
 def register(request):
@@ -46,20 +40,14 @@ def register(request):
             password_1 = form["password_1"].value()
 
             user = User.objects.create_user(
-                username=register_name,
-                email=email,
-                password=password_1
+                username=register_name, email=email, password=password_1
             )
             user.save()
 
             messages.success(request, "Cadastro efetuado com sucesso")
             return redirect('login')
 
-    return render(
-        request,
-        'users/register.html',
-        {"form": form}
-    )
+    return render(request, 'users/register.html', {"form": form})
 
 
 def logout(request):

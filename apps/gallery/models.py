@@ -26,7 +26,7 @@ class Photography(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=False,
-        related_name="user"
+        related_name="user",
     )
 
     def __str__(self):

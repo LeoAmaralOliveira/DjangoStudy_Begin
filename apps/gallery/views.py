@@ -9,7 +9,9 @@ def index(request):
         messages.error(request, "Usuário não logado!")
         return redirect('login')
 
-    photographies = Photography.objects.order_by("photo_date").filter(published=True)
+    photographies = Photography.objects.order_by("photo_date").filter(
+        published=True
+    )
     return render(request, 'gallery/index.html', {"cards": photographies})
 
 
@@ -27,12 +29,16 @@ def search(request):
         messages.error(request, "Usuário não logado!")
         return redirect('login')
 
-    photographies = Photography.objects.order_by("photo_date").filter(published=True)
+    photographies = Photography.objects.order_by("photo_date").filter(
+        published=True
+    )
 
     if "search" in request.GET:
         name_to_search = request.GET["search"]
         if name_to_search:
-            photographies = photographies.filter(name__icontains=name_to_search)
+            photographies = photographies.filter(
+                name__icontains=name_to_search
+            )
 
     return render(request, 'gallery/index.html', {"cards": photographies})
 
@@ -58,13 +64,19 @@ def edit_image(request, photo_id):
     form = PhotographyForms(instance=photography)
 
     if request.method == 'POST':
-        form = PhotographyForms(request.POST, request.FILES, instance=photography)
+        form = PhotographyForms(
+            request.POST, request.FILES, instance=photography
+        )
         if form.is_valid():
             form.save()
             messages.success(request, 'Fotografia editada com sucesso!')
             return redirect('index')
 
-    return render(request, 'gallery/edit_image.html', {'form': form, 'photo_id': photo_id})
+    return render(
+        request,
+        'gallery/edit_image.html',
+        {'form': form, 'photo_id': photo_id},
+    )
 
 
 def delete_image(request, photo_id):
@@ -75,5 +87,7 @@ def delete_image(request, photo_id):
 
 
 def filter(request, category):
-    photographies = Photography.objects.order_by("photo_date").filter(published=True, category=category)
+    photographies = Photography.objects.order_by("photo_date").filter(
+        published=True, category=category
+    )
     return render(request, 'gallery/index.html', {"cards": photographies})

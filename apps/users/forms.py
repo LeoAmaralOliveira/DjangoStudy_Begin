@@ -8,22 +8,16 @@ class LoginForms(forms.Form):
         required=True,
         max_length=100,
         widget=forms.TextInput(
-            attrs={
-                "class": "form-control",
-                "placeholder": "Ex.: João Silva"
-            }
-        )
+            attrs={"class": "form-control", "placeholder": "Ex.: João Silva"}
+        ),
     )
     password = forms.CharField(
         label="Senha",
         required=True,
         max_length=70,
         widget=forms.PasswordInput(
-            attrs={
-                "class": "form-control",
-                "placeholder": "Digite sua senha"
-            }
-        )
+            attrs={"class": "form-control", "placeholder": "Digite sua senha"}
+        ),
     )
 
 
@@ -33,11 +27,8 @@ class RegisterForms(forms.Form):
         required=True,
         max_length=100,
         widget=forms.TextInput(
-            attrs={
-                "class": "form-control",
-                "placeholder": "Ex.: João Silva"
-            }
-        )
+            attrs={"class": "form-control", "placeholder": "Ex.: João Silva"}
+        ),
     )
     email = forms.EmailField(
         label="E-mail",
@@ -46,20 +37,17 @@ class RegisterForms(forms.Form):
         widget=forms.EmailInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Ex.: joaosilva@xpto.com"
+                "placeholder": "Ex.: joaosilva@xpto.com",
             }
-        )
+        ),
     )
     password_1 = forms.CharField(
         label="Senha",
         required=True,
         max_length=70,
         widget=forms.PasswordInput(
-            attrs={
-                "class": "form-control",
-                "placeholder": "Digite sua senha"
-            }
-        )
+            attrs={"class": "form-control", "placeholder": "Digite sua senha"}
+        ),
     )
     password_2 = forms.CharField(
         label="Confirme sua senha",
@@ -68,9 +56,9 @@ class RegisterForms(forms.Form):
         widget=forms.PasswordInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Digite sua senha novamente"
+                "placeholder": "Digite sua senha novamente",
             }
-        )
+        ),
     )
 
     def clean_register_name(self):
@@ -82,9 +70,7 @@ class RegisterForms(forms.Form):
                     "Espaços não são permitidos neste campo"
                 )
             elif User.objects.filter(username=name).exists():
-                raise forms.ValidationError(
-                    "Usuário já existente"
-                )
+                raise forms.ValidationError("Usuário já existente")
             else:
                 return name
 
@@ -92,9 +78,7 @@ class RegisterForms(forms.Form):
         email = self.cleaned_data.get("email")
         if email:
             if User.objects.filter(email=email).exists():
-                raise forms.ValidationError(
-                    "E-mail já existente"
-                )
+                raise forms.ValidationError("E-mail já existente")
             else:
                 return email
 
@@ -104,8 +88,6 @@ class RegisterForms(forms.Form):
 
         if password_1 and password_1:
             if password_1 != password_2:
-                raise forms.ValidationError(
-                    "As senhas não são iguais"
-                )
+                raise forms.ValidationError("As senhas não são iguais")
             else:
                 return password_2
