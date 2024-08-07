@@ -1,5 +1,5 @@
 # 🪐 Alura Spaces
-Alura spaces is a website whitch you can register images from your favorites celestial corpuses.
+Alura spaces is a website which you can register images from your favorites celestial corpuses.
 
 <img src="image.png" alt="Imagem do AluraBooks" width="50%">
 
@@ -20,7 +20,7 @@ To run the project you must have Python 3.10. You can get the installation right
 If you don't have pip, you can install right <a href="https://pip.pypa.io/en/stable/installation/" target="_blank">here</a>.
 
 
-**IMPORTANT**: You must create a .env file to put yout Django secret key and your AWS Keys.
+**IMPORTANT**: You must create a .env file to put your Django secret key and your AWS Keys.
 
 
 After steps above, run: `python manage.py collectstatic` to upload the static files to S3.
