@@ -5,7 +5,9 @@ from apps.gallery.models import Photography
 class PhotographyForms(forms.ModelForm):
     class Meta:
         model = Photography
-        exclude = ['published',]
+        exclude = [
+            'published',
+        ]
         labels = {
             'description': 'Descrição',
             'photo_date': 'Data de registro',
@@ -24,10 +26,7 @@ class PhotographyForms(forms.ModelForm):
             'photo': forms.FileInput(attrs={'class': 'form-control'}),
             'photo_date': forms.DateInput(
                 format='%d/%m/%Y',
-                attrs={
-                    'type': 'date',
-                    'class': 'form-control'
-                }
+                attrs={'type': 'date', 'class': 'form-control'},
             ),
             'user': forms.Select(attrs={'class': 'form-control'}),
         }

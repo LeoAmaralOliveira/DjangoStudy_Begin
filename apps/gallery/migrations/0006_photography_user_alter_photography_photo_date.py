@@ -9,7 +9,10 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gallery', '0005_alter_photography_photo_alter_photography_photo_date'),
+        (
+            'gallery',
+            '0005_alter_photography_photo_alter_photography_photo_date',
+        ),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
@@ -17,11 +20,18 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='photography',
             name='user',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='user', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name='user',
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AlterField(
             model_name='photography',
             name='photo_date',
-            field=models.DateTimeField(default=datetime.datetime(2024, 8, 2, 20, 14, 50, 174708)),
+            field=models.DateTimeField(
+                default=datetime.datetime(2024, 8, 2, 20, 14, 50, 174708)
+            ),
         ),
     ]
