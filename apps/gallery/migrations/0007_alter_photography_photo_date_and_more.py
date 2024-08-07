@@ -14,7 +14,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='photography',
             name='photo_date',
-            field=models.DateTimeField(default=datetime.datetime(2024, 8, 5, 20, 36, 26, 610780)),
+            field=models.DateTimeField(
+                default=datetime.datetime(2024, 8, 5, 20, 36, 26, 610780)
+            ),
         ),
         migrations.AlterField(
             model_name='photography',

@@ -1,8 +1,12 @@
 from django.urls import path
 from apps.gallery.views import (
-    index, image, search,
-    new_image, edit_image, delete_image,
-    filter
+    index,
+    image,
+    search,
+    new_image,
+    edit_image,
+    delete_image,
+    filter,
 )
 
 
